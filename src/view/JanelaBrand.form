@@ -107,9 +107,11 @@
                                   <Component id="jButtonIdDelete" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldRegYear" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jTextFieldRegYear" alignment="0" pref="375" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <Component id="jLabel11" min="-2" pref="95" max="-2" attributes="0"/>
                           <Component id="jTextFieldIdUpdate" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
