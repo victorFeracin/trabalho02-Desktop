@@ -4,10 +4,77 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import model.Cliente;
+
 /**
  *
  * @author Victor Hugo
  */
-public class ControllerArquivoTextoClienteBin {
+public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
     
+    protected ArrayList<Cliente> clientes = new ArrayList<>();
+    protected StringBuilder sbClientes = new StringBuilder();
+
+    //getters
+    public ArrayList<Cliente> getClientes() {
+        return (ArrayList<Cliente>) getObjects();
+    }
+    
+    public StringBuilder getSbClientes() {
+        return sbClientes;
+    }
+    
+    //setters
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.setObjects((ArrayList<Cliente>) clientes);
+    }
+   
+    public void setSbClientes(StringBuilder sbClientes) {
+        this.sbClientes = sbClientes;
+    }
+    
+    //methods
+    public void clear() {
+        clientes.clear();
+        sbClientes.setLength(0);
+        getArquivo();
+        if(ler() == true) {
+            clientes = (ArrayList<Cliente>) getObjects();
+        }
+    }
+    
+    public void registerCliente(String name, String email, String phone) {
+        clear();
+        if(clientes.isEmpty()) {
+            clientes.add(new Cliente(1, name, email, phone));
+        }
+        else {
+            clientes.add(new Cliente(clientes.get(clientes.size() - 1).getIdCliente() + 1, name, email, phone));
+        }
+        
+        setObjects((ArrayList<Cliente>) clientes);
+        getArquivo();
+        escrever(true);
+    }
+    
+    public void readCliente() {
+        clear();
+        
+        for(Cliente cliente : clientes) {
+            sbClientes
+                    .append("ID: ")
+                    .append(cliente.getIdCliente())
+                    .append("\n")
+                    .append("Name: ")
+                    .append(cliente.getName())
+                    .append("\n")
+                    .append("Email: ")
+                    .append(cliente.getEmail())
+                    .append("\n")
+                    .append("Phone: ")
+                    .append(cliente.getPhone())
+                    .append("\n\n");
+        }
+    }
 }

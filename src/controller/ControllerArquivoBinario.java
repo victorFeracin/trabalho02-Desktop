@@ -1,62 +1,57 @@
 package controller;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 /**
- *
- * @author Victor Hugo
+ * @author fabricio
  */
 public class ControllerArquivoBinario extends ControllerArquivo {
 
-    private Object objeto = null;
+    protected ArrayList<? extends Object> objects = new ArrayList<>();
     private ObjectInputStream leitor = null;
     private ObjectOutputStream escritor = null;
 
-    /**
-     * @return the objeto
-     */
-    public Object getObjeto() {
-        return objeto;
+    public ArrayList<? extends Object> getObjects() {
+        return objects;
     }
 
-    /**
-     * @param objeto the objeto to set
-     */
-    public void setObject(Object objeto) {
-        this.objeto = objeto;
+    public void setObjects(ArrayList<? extends Object> objects) {
+        this.objects = objects;
     }
 
     @Override
     public boolean ler() {
-        if (arquivo != null) {
-            try {
+        objects = null;
+        try {
             leitor = new ObjectInputStream(new FileInputStream(arquivo));
-            objeto = leitor.readObject();
+            objects = (ArrayList<? extends Object>) leitor.readObject();
             leitor.close();
             return true;
-            } catch (ClassNotFoundException erro) {
-                //erro.printStackTrace();
-                System.err.println(erro.getMessage() + "Classe não encontrada.");
-                return false;
-            } catch (IOException erro) {
-                System.err.println(erro.getMessage() + "Erro ao ler arquivo binário.");
-                return false;
-            }
+        } catch (ClassNotFoundException erro) {
+            //erro.printStackTrace();
+            System.err.println(erro.getMessage() + "Classe não encontrada.");
+            return false;
+        } catch (IOException erro) {
+            System.err.println(erro.getMessage() + "Erro ao ler arquivo binário.");
+            return false;
         }
-        return false;
     }
 
     @Override
     public boolean escrever(boolean append) {
         if (arquivo != null) {
             try {
+                arquivo.delete();
+                arquivo.createNewFile();
                 escritor = new ObjectOutputStream(new FileOutputStream(arquivo, append));
-                escritor.writeObject(objeto);
+                escritor.writeObject(objects);
                 escritor.close();
                 return true;
             } catch (IOException erro) {
@@ -67,31 +62,4 @@ public class ControllerArquivoBinario extends ControllerArquivo {
             return false;
         }
     }
-
-    /*
-     * metodo para ser usado na criação de escritores binarios
-     * quando for necessario escrever varios objetos em um mesmo
-     * arquivo considerando multiplas execuções da aplicação. 
-     */
-    public static ObjectOutputStream CriaEscritorObjeto(File arquivo) {
-        ObjectOutputStream out = null;
-        try {
-            if (arquivo.exists()) {
-                FileOutputStream fos = new FileOutputStream(arquivo, true);
-                out = new ObjectOutputStream(fos) {
-                    @Override
-                    protected void writeStreamHeader() {
-                        // do not write a header
-                    }
-                };
-            } else {
-                FileOutputStream fos = new FileOutputStream(arquivo, true);
-                out = new ObjectOutputStream(fos);
-            }
-        } catch (IOException erro) {
-            System.out.println("Erro ao criar arquivo. " + erro);
-        }
-        return out;
-    }
-
 }
