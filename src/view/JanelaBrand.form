@@ -80,8 +80,7 @@
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" pref="78" max="-2" attributes="0"/>
-                              <Component id="jTextFieldRegPhone" min="-2" pref="250" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="jTextFieldRegWebsite" min="-2" pref="250" max="-2" attributes="0"/>
                               <Component id="jButtonRegister" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel6" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
@@ -108,20 +107,19 @@
                                   <Component id="jButtonIdDelete" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldRegEmail" alignment="0" pref="375" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldRegYear" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel11" min="-2" pref="95" max="-2" attributes="0"/>
                           <Component id="jTextFieldIdUpdate" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
                           <Component id="jTextFieldNameUpdate" alignment="0" min="-2" pref="375" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEmailUpdate" alignment="0" min="-2" pref="375" max="-2" attributes="0"/>
+                          <Component id="jTextFieldYearUpdate" alignment="0" min="-2" pref="375" max="-2" attributes="0"/>
                           <Component id="jLabel14" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                          <Component id="jTextFieldPhoneUpdate" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                          <Component id="jTextFieldWebsiteUpdate" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                           <Component id="jButtonUpdate" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="517" max="32767" attributes="0"/>
                   </Group>
@@ -156,11 +154,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldRegEmail" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldRegYear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldRegPhone" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldRegWebsite" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonRegister" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -189,11 +187,11 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldEmailUpdate" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldYearUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldPhoneUpdate" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldWebsiteUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="316" max="32767" attributes="0"/>
@@ -206,7 +204,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextPane" name="jTextPaneCustomers">
+                <Component class="javax.swing.JTextPane" name="jTextPaneBrands">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                   </Properties>
@@ -215,7 +213,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="jButtonRead">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Read all Customers"/>
+                <Property name="text" type="java.lang.String" value="Read all Brands"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonReadMouseClicked"/>
@@ -227,7 +225,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Register a Customer"/>
+                <Property name="text" type="java.lang.String" value="Register a Brand"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -239,18 +237,18 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldRegName">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldRegEmail">
+            <Component class="javax.swing.JTextField" name="jTextFieldRegYear">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Email:"/>
+                <Property name="text" type="java.lang.String" value="Year of Creation:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldRegPhone">
+            <Component class="javax.swing.JTextField" name="jTextFieldRegWebsite">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Phone:"/>
+                <Property name="text" type="java.lang.String" value="Website:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRegister">
@@ -266,14 +264,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Customers"/>
+                <Property name="text" type="java.lang.String" value="Brands"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Customer ID:"/>
+                <Property name="text" type="java.lang.String" value="Brand ID:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldIdSearch">
@@ -291,7 +289,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonIdSearch">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Search a Customer "/>
+                <Property name="text" type="java.lang.String" value="Search a Brand "/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonIdSearchMouseClicked"/>
@@ -303,21 +301,21 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Delete a Customer"/>
+                <Property name="text" type="java.lang.String" value="Delete a Brand"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator3">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Customer ID:"/>
+                <Property name="text" type="java.lang.String" value="Brand ID:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldIdDelete">
             </Component>
             <Component class="javax.swing.JButton" name="jButtonIdDelete">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Delete a Customer"/>
+                <Property name="text" type="java.lang.String" value="Delete a Brand"/>
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonIdDeleteMouseClicked"/>
@@ -328,14 +326,14 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Update a Customer"/>
+                <Property name="text" type="java.lang.String" value="Update a Brand"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator4">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Customer ID:"/>
+                <Property name="text" type="java.lang.String" value="Brand ID:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldIdUpdate">
@@ -347,19 +345,19 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNameUpdate">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldEmailUpdate">
+            <Component class="javax.swing.JTextField" name="jTextFieldYearUpdate">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Email:"/>
+                <Property name="text" type="java.lang.String" value="Year of Creation:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Phone:"/>
+                <Property name="text" type="java.lang.String" value="Website:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldPhoneUpdate">
+            <Component class="javax.swing.JTextField" name="jTextFieldWebsiteUpdate">
             </Component>
             <Component class="javax.swing.JButton" name="jButtonUpdate">
               <Properties>

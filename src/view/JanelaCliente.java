@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author vhsf0
+ * @author Victor Hugo
  */
 public class JanelaCliente extends javax.swing.JFrame {
     ControllerArquivoBinarioCliente controle = new ControllerArquivoBinarioCliente();

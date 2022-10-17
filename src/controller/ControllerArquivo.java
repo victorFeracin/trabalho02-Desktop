@@ -13,17 +13,13 @@ public abstract class ControllerArquivo {
     public abstract boolean ler();
     public abstract boolean escrever(boolean append);
     
-    /**
-     * @return the arquivo
-     */
+    //getters
     public File getArquivo() {
         return arquivo;
     }
 
     
-    /**
-     * @param TextoBotao o texto para o botão de escolha do usuário
-     */
+    //setters
     public void setArquivo(String TextoBotao, String suggestedName) {
         arquivo = null;
         String pastainicial = System.getProperty("user.dir");

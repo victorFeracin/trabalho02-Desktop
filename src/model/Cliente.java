@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author vhsf0
+ * @author Victor Hugo
  */
 public class Cliente implements java.io.Serializable {
     private int idCliente;

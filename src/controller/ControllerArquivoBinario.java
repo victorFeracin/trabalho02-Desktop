@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- * @author fabricio
+ * @author Victor Hugo
  */
 public class ControllerArquivoBinario extends ControllerArquivo {
 
@@ -18,10 +16,12 @@ public class ControllerArquivoBinario extends ControllerArquivo {
     private ObjectInputStream leitor = null;
     private ObjectOutputStream escritor = null;
 
+    //getters
     public ArrayList<? extends Object> getObjects() {
         return objects;
     }
 
+    //setters
     public void setObjects(ArrayList<? extends Object> objects) {
         this.objects = objects;
     }
@@ -35,7 +35,6 @@ public class ControllerArquivoBinario extends ControllerArquivo {
             leitor.close();
             return true;
         } catch (ClassNotFoundException erro) {
-            //erro.printStackTrace();
             System.err.println(erro.getMessage() + "Classe não encontrada.");
             return false;
         } catch (IOException erro) {
