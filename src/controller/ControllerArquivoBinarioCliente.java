@@ -77,4 +77,74 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
                     .append("\n\n");
         }
     }
+    
+    public void deleteCliente(String idCliente) {
+        clear();
+        int i = 0;
+        for(Cliente cliente : clientes) {
+            try {
+                if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
+                    clientes.remove(i);
+                    break;
+                }
+            } catch(Exception e ) {
+                System.out.println("Error: Customer not removed.");         
+            }
+            i++;
+        }
+        
+        setObjects((ArrayList<Cliente>) clientes);
+        getArquivo();
+        escrever(false);   
+    }
+    
+    public void updateCliente(String idCliente, String name, String email, String phone) {
+        clear();
+        int i = 0;
+        for(Cliente cliente : clientes) {
+            try {
+                if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
+                    cliente.setName(name);
+                    cliente.setEmail(email);
+                    cliente.setPhone(phone);
+                    break;   
+                }
+            } catch(Exception e) {
+                System.out.println("Error: Could not update customer.");
+            }
+            i++;
+        }
+        
+        setObjects((ArrayList<Cliente>) clientes);
+        getArquivo();
+        escrever(false); 
+    }
+    
+    public void searchCliente(String idCliente) {
+        clear();
+        int i = 0;
+        for(Cliente cliente : clientes) {
+            try {
+                if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
+                    sbClientes
+                        .append("ID: ")
+                        .append(cliente.getIdCliente())
+                        .append("\n")
+                        .append("Name: ")
+                        .append(cliente.getName())
+                        .append("\n")
+                        .append("Email: ")
+                        .append(cliente.getEmail())
+                        .append("\n")
+                        .append("Phone: ")
+                        .append(cliente.getPhone())
+                        .append("\n\n");
+                    break;
+                }
+            } catch(Exception e ) {
+                System.out.println("Error: Customer not found.");         
+            }
+            i++;
+        }
+    }
 }

@@ -119,6 +119,11 @@ public class JanelaCliente extends javax.swing.JFrame {
         jLabel7.setText("OR");
 
         jButtonIdSearch.setText("Search a Customer ");
+        jButtonIdSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonIdSearchMouseClicked(evt);
+            }
+        });
         jButtonIdSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonIdSearchActionPerformed(evt);
@@ -131,6 +136,11 @@ public class JanelaCliente extends javax.swing.JFrame {
         jLabel9.setText("Customer ID:");
 
         jButtonIdDelete.setText("Delete a Customer");
+        jButtonIdDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonIdDeleteMouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Update a Customer");
@@ -144,6 +154,11 @@ public class JanelaCliente extends javax.swing.JFrame {
         jLabel14.setText("Phone:");
 
         jButtonUpdate.setText("Update");
+        jButtonUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonUpdateMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,10 +173,7 @@ public class JanelaCliente extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextFieldRegPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextFieldRegName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldRegEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButtonRegister)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane2)
@@ -184,7 +196,10 @@ public class JanelaCliente extends javax.swing.JFrame {
                                 .addComponent(jTextFieldIdDelete, javax.swing.GroupLayout.Alignment.LEADING))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButtonIdDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator4))
+                        .addComponent(jSeparator4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldRegName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldRegEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)))
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldIdUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,6 +358,37 @@ public class JanelaCliente extends javax.swing.JFrame {
     private void jButtonIdSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIdSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonIdSearchActionPerformed
+
+    private void jButtonIdDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdDeleteMouseClicked
+        try {
+            controle.deleteCliente(jTextFieldIdDelete.getText());
+            JOptionPane.showMessageDialog(this, "Customer with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Customer removed", JOptionPane.INFORMATION_MESSAGE);
+            controle.readCliente();
+            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Error. Something went wrong.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonIdDeleteMouseClicked
+
+    private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
+        try {
+            controle.updateCliente(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), jTextFieldEmailUpdate.getText(), jTextFieldPhoneUpdate.getText());
+            JOptionPane.showMessageDialog(this, "Customer successfully updated!", "Customer updated", JOptionPane.INFORMATION_MESSAGE);
+            controle.readCliente();
+            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Error. Could not update customer.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonUpdateMouseClicked
+
+    private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
+        try {
+            controle.searchCliente(jTextFieldIdSearch.getText());
+            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Error. Could not search this customer.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonIdSearchMouseClicked
 
     /**
      * @param args the command line arguments
