@@ -59,5 +59,5 @@ public class Brand implements java.io.Serializable {
         this.yearCreated = yearCreated;
         this.website = website;
     }
-    
+ 
 }

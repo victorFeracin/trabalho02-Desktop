@@ -120,9 +120,10 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
         escrever(false); 
     }
     
-    public void searchCliente(String idCliente) {
+    public Cliente searchCliente(String idCliente) {
         clear();
         int i = 0;
+        Cliente objCliente = null;
         for(Cliente cliente : clientes) {
             try {
                 if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
@@ -139,6 +140,8 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
                         .append("Phone: ")
                         .append(cliente.getPhone())
                         .append("\n\n");
+                    
+                    objCliente = new Cliente(cliente.getIdCliente(), cliente.getName(), cliente.getEmail(), cliente.getPhone());
                     break;
                 }
             } catch(Exception e ) {
@@ -146,5 +149,6 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
             }
             i++;
         }
+        return objCliente;
     }
 }

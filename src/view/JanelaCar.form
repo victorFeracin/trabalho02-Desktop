@@ -114,10 +114,8 @@
                               <Component id="jButtonUpdate" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextFieldRegYear" alignment="0" pref="375" max="32767" attributes="0"/>
-                                  <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jTextFieldRegYear" alignment="0" pref="375" max="32767" attributes="0"/>
+                              <Component id="jTextFieldRegName" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>

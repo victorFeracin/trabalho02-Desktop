@@ -6,6 +6,7 @@ package view;
 
 import controller.ControllerArquivoBinarioCliente;
 import javax.swing.JOptionPane;
+import model.Cliente;
 
 /**
  *
@@ -383,8 +384,13 @@ public class JanelaCliente extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            controle.searchCliente(jTextFieldIdSearch.getText());
+            Cliente cliente = controle.searchCliente(jTextFieldIdSearch.getText());
             jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+            
+            jTextFieldIdUpdate.setText(String.valueOf(cliente.getIdCliente()));
+            jTextFieldNameUpdate.setText(String.valueOf(cliente.getName()));
+            jTextFieldEmailUpdate.setText(String.valueOf(cliente.getEmail()));
+            jTextFieldPhoneUpdate.setText(String.valueOf(cliente.getPhone()));
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this customer.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }

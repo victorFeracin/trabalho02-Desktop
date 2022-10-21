@@ -6,7 +6,8 @@ package view;
 
 import controller.ControllerArquivoBinarioCar;
 import javax.swing.JOptionPane;
-
+import model.Car;
+        
 /**
  *
  * @author Victor Hugo
@@ -403,8 +404,14 @@ public class JanelaCar extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            controle.searchCar(jTextFieldIdSearch.getText());
+            Car car = controle.searchCar(jTextFieldIdSearch.getText());
             jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+            
+            jTextFieldIdUpdate.setText(String.valueOf(car.getIdCar()));
+            jTextFieldNameUpdate.setText(String.valueOf(car.getName()));
+            jTextFieldYearUpdate.setText(String.valueOf(car.getYear()));
+            jTextFieldBrandUpdate.setText(String.valueOf(car.getBrand()));
+            jTextFieldPriceUpdate.setText(String.valueOf(car.getPrice()));
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this car.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }

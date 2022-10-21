@@ -6,6 +6,7 @@ package view;
 
 import controller.ControllerArquivoBinarioBrand;
 import javax.swing.JOptionPane;
+import model.Brand;
 
 /**
  *
@@ -383,8 +384,13 @@ public class JanelaBrand extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            controle.searchBrand(jTextFieldIdSearch.getText());
+            Brand brand = controle.searchBrand(jTextFieldIdSearch.getText());
             jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+            
+            jTextFieldIdUpdate.setText(String.valueOf(brand.getIdBrand()));
+            jTextFieldNameUpdate.setText(String.valueOf(brand.getName()));
+            jTextFieldYearUpdate.setText(String.valueOf(brand.getYearCreated()));
+            jTextFieldWebsiteUpdate.setText(String.valueOf(brand.getWebsite()));
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this brand.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }

@@ -119,9 +119,10 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
         escrever(false); 
     }
     
-    public void searchBrand(String idBrand) {
+    public Brand searchBrand(String idBrand) {
         clear();
         int i = 0;
+        Brand objBrand = null;
         for(Brand brand : brands) {
             try {
                 if(brands.get(i).getIdBrand() == Integer.valueOf(idBrand)) {
@@ -138,6 +139,8 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
                         .append("Website: ")
                         .append(brand.getWebsite())
                         .append("\n\n");
+                    
+                    objBrand = new Brand(brand.getIdBrand(), brand.getName(), brand.getYearCreated(), brand.getWebsite());
                     break;
                 }
             } catch(Exception e ) {
@@ -145,5 +148,6 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
             }
             i++;
         }
+        return objBrand;
     }
 }

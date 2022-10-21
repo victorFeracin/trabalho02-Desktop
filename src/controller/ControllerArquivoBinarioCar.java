@@ -122,9 +122,10 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
         escrever(false); 
     }
     
-    public void searchCar(String idCar) {
+    public Car searchCar(String idCar) {
         clear();
         int i = 0;
+        Car objCar = null;
         for(Car car : cars) {
             try {
                 if(cars.get(i).getIdCar() == Integer.valueOf(idCar)) {
@@ -144,6 +145,8 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
                         .append("Price: ")
                         .append(car.getPrice())
                         .append("\n\n");
+                    
+                    objCar = new Car(car.getIdCar(), car.getName(), car.getYear(), car.getBrand(), car.getPrice());
                     break;
                 }
             } catch(Exception e ) {
@@ -151,5 +154,6 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
             }
             i++;
         }
+        return objCar;
     }
 }
