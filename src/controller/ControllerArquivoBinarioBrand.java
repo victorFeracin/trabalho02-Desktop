@@ -77,52 +77,42 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
         }
     }
     
-    public void deleteBrand(String idBrand) {
+    public boolean deleteBrand(String idBrand) {
         clear();
-        int i = 0;
-        for(Brand brand : brands) {
-            try {
-                if(brands.get(i).getIdBrand() == Integer.valueOf(idBrand)) {
-                    brands.remove(i);
-                    break;
-                }
-            } catch(Exception e ) {
-                System.out.println("Error: Brand not removed.");         
-            }
-            i++;
+        int posBrand = searchBrand(idBrand);
+        if(posBrand != -1) {
+            brands.remove(posBrand);
+            
+            setObjects((ArrayList<Brand>) brands);
+            getArquivo();
+            escrever(false);  
+            return true;
+        } else {
+            return false;
         }
-        
-        setObjects((ArrayList<Brand>) brands);
-        getArquivo();
-        escrever(false);   
     }
     
-    public void updateBrand(String idBrand, String name, int yearCreated, String website) {
+    public boolean updateBrand(String idBrand, String name, int yearCreated, String website) {
         clear();
-        int i = 0;
-        for(Brand brand : brands) {
-            try {
-                if(brands.get(i).getIdBrand() == Integer.valueOf(idBrand)) {
-                    brand.setName(name);
-                    brand.setYearCreated(yearCreated);
-                    brand.setWebsite(website);
-                    break;   
-                }
-            } catch(Exception e) {
-                System.out.println("Error: Could not update brand.");
-            }
-            i++;
+        int posBrand = searchBrand(idBrand);
+        if (posBrand != -1){
+           brands.get(posBrand).setName(name);
+           brands.get(posBrand).setYearCreated(yearCreated);
+           brands.get(posBrand).setWebsite(website);
+           
+           setObjects((ArrayList<Brand>) brands);
+           getArquivo();
+           escrever(false); 
+           return true;
+        } else {
+           return false;
         }
-        
-        setObjects((ArrayList<Brand>) brands);
-        getArquivo();
-        escrever(false); 
     }
     
-    public Brand searchBrand(String idBrand) {
+    public int searchBrand(String idBrand) {
         clear();
         int i = 0;
-        Brand objBrand = null;
+        int posBrand = -1;
         for(Brand brand : brands) {
             try {
                 if(brands.get(i).getIdBrand() == Integer.valueOf(idBrand)) {
@@ -139,8 +129,7 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
                         .append("Website: ")
                         .append(brand.getWebsite())
                         .append("\n\n");
-                    
-                    objBrand = new Brand(brand.getIdBrand(), brand.getName(), brand.getYearCreated(), brand.getWebsite());
+                    posBrand = i;
                     break;
                 }
             } catch(Exception e ) {
@@ -148,6 +137,6 @@ public class ControllerArquivoBinarioBrand extends ControllerArquivoBinario {
             }
             i++;
         }
-        return objBrand;
+        return posBrand;
     }
 }

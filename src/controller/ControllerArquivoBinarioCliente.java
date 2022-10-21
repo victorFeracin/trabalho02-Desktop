@@ -60,7 +60,6 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
     
     public void readCliente() {
         clear();
-        
         for(Cliente cliente : clientes) {
             sbClientes
                     .append("ID: ")
@@ -78,52 +77,42 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
         }
     }
     
-    public void deleteCliente(String idCliente) {
+    public boolean deleteCliente(String idCliente) {
         clear();
-        int i = 0;
-        for(Cliente cliente : clientes) {
-            try {
-                if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
-                    clientes.remove(i);
-                    break;
-                }
-            } catch(Exception e ) {
-                System.out.println("Error: Customer not removed.");         
-            }
-            i++;
+        int posCliente = searchCliente(idCliente);
+        if(posCliente != -1) {
+            clientes.remove(posCliente);
+            
+            setObjects((ArrayList<Cliente>) clientes);
+            getArquivo();
+            escrever(false);  
+            return true;
+        } else {
+            return false;
         }
-        
-        setObjects((ArrayList<Cliente>) clientes);
-        getArquivo();
-        escrever(false);   
     }
     
-    public void updateCliente(String idCliente, String name, String email, String phone) {
+    public boolean updateCliente(String idCliente, String name, String email, String phone) {
         clear();
-        int i = 0;
-        for(Cliente cliente : clientes) {
-            try {
-                if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
-                    cliente.setName(name);
-                    cliente.setEmail(email);
-                    cliente.setPhone(phone);
-                    break;   
-                }
-            } catch(Exception e) {
-                System.out.println("Error: Could not update customer.");
-            }
-            i++;
+        int posCliente = searchCliente(idCliente);
+        if (posCliente != -1){
+           clientes.get(posCliente).setName(name);
+           clientes.get(posCliente).setEmail(email);
+           clientes.get(posCliente).setPhone(phone);
+           
+           setObjects((ArrayList<Cliente>) clientes);
+           getArquivo();
+           escrever(false); 
+           return true;
+        } else {
+           return false;
         }
-        
-        setObjects((ArrayList<Cliente>) clientes);
-        getArquivo();
-        escrever(false); 
     }
     
-    public Cliente searchCliente(String idCliente) {
+    public int searchCliente(String idCliente) {
         clear();
         int i = 0;
-        Cliente objCliente = null;
+        int posCliente = -1;
         for(Cliente cliente : clientes) {
             try {
                 if(clientes.get(i).getIdCliente() == Integer.valueOf(idCliente)) {
@@ -140,8 +129,7 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
                         .append("Phone: ")
                         .append(cliente.getPhone())
                         .append("\n\n");
-                    
-                    objCliente = new Cliente(cliente.getIdCliente(), cliente.getName(), cliente.getEmail(), cliente.getPhone());
+                    posCliente = i;
                     break;
                 }
             } catch(Exception e ) {
@@ -149,6 +137,6 @@ public class ControllerArquivoBinarioCliente extends ControllerArquivoBinario{
             }
             i++;
         }
-        return objCliente;
+        return posCliente;
     }
 }

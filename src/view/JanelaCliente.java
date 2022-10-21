@@ -339,6 +339,10 @@ public class JanelaCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Customer successfully registered!", "Customer registered", JOptionPane.INFORMATION_MESSAGE);
             controle.readCliente();
             jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+            
+            jTextFieldRegName.setText("");
+            jTextFieldRegEmail.setText("");
+            jTextFieldRegPhone.setText("");
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Customer not registered.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -363,10 +367,19 @@ public class JanelaCliente extends javax.swing.JFrame {
 
     private void jButtonIdDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdDeleteMouseClicked
         try {
-            controle.deleteCliente(jTextFieldIdDelete.getText());
-            JOptionPane.showMessageDialog(this, "Customer with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Customer removed", JOptionPane.INFORMATION_MESSAGE);
-            controle.readCliente();
-            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+            if(controle.deleteCliente(jTextFieldIdDelete.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Customer with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Customer removed", JOptionPane.INFORMATION_MESSAGE);
+                controle.readCliente();
+                jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldEmailUpdate.setText("");
+                jTextFieldPhoneUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Customer not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }   
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Something went wrong.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -374,10 +387,19 @@ public class JanelaCliente extends javax.swing.JFrame {
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
         try {
-            controle.updateCliente(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), jTextFieldEmailUpdate.getText(), jTextFieldPhoneUpdate.getText());
-            JOptionPane.showMessageDialog(this, "Customer successfully updated!", "Customer updated", JOptionPane.INFORMATION_MESSAGE);
-            controle.readCliente();
-            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+            if(controle.updateCliente(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), jTextFieldEmailUpdate.getText(), jTextFieldPhoneUpdate.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Customer successfully updated!", "Customer updated", JOptionPane.INFORMATION_MESSAGE);
+                controle.readCliente();
+                jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldEmailUpdate.setText("");
+                jTextFieldPhoneUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Customer not found.", "Customer not found: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not update customer.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -385,13 +407,19 @@ public class JanelaCliente extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            Cliente cliente = controle.searchCliente(jTextFieldIdSearch.getText());
-            jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
+            int pos = controle.searchCliente(jTextFieldIdSearch.getText());
+            Cliente cliente = controle.getClientes().get(pos);
+            if (pos != -1) {
+                jTextPaneCustomers.setText(String.valueOf(controle.getSbClientes()));
             
-            jTextFieldIdUpdate.setText(String.valueOf(cliente.getIdCliente()));
-            jTextFieldNameUpdate.setText(String.valueOf(cliente.getName()));
-            jTextFieldEmailUpdate.setText(String.valueOf(cliente.getEmail()));
-            jTextFieldPhoneUpdate.setText(String.valueOf(cliente.getPhone()));
+                jTextFieldIdDelete.setText(String.valueOf(cliente.getIdCliente()));
+                jTextFieldIdUpdate.setText(String.valueOf(cliente.getIdCliente()));
+                jTextFieldNameUpdate.setText(String.valueOf(cliente.getName()));
+                jTextFieldEmailUpdate.setText(String.valueOf(cliente.getEmail()));
+                jTextFieldPhoneUpdate.setText(String.valueOf(cliente.getPhone()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Customer not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }    
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this customer.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }

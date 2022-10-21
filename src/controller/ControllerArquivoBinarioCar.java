@@ -79,53 +79,43 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
         }
     }
     
-    public void deleteCar(String idCar) {
+    public boolean deleteCar(String idCar) {
         clear();
-        int i = 0;
-        for(Car car : cars) {
-            try {
-                if(cars.get(i).getIdCar() == Integer.valueOf(idCar)) {
-                    cars.remove(i);
-                    break;
-                }
-            } catch(Exception e ) {
-                System.out.println("Error: Car not removed.");         
-            }
-            i++;
-        }
-        
-        setObjects((ArrayList<Car>) cars);
-        getArquivo();
-        escrever(false);   
+        int posCar = searchCar(idCar);
+        if(posCar != -1) {
+            cars.remove(posCar);
+            
+            setObjects((ArrayList<Car>) cars);
+            getArquivo();
+            escrever(false);  
+            return true;
+        } else {
+            return false;
+        }   
     }
     
-    public void updateCar(String idCar, String name, int year, String brand, double price) {
+    public boolean updateCar(String idCar, String name, int year, String brand, double price) {
         clear();
-        int i = 0;
-        for(Car car : cars) {
-            try {
-                if(cars.get(i).getIdCar() == Integer.valueOf(idCar)) {
-                    car.setName(name);
-                    car.setYear(year);
-                    car.setBrand(brand);
-                    car.setPrice(price);
-                    break;   
-                }
-            } catch(Exception e) {
-                System.out.println("Error: Could not update car.");
-            }
-            i++;
+        int posCar = searchCar(idCar);
+        if (posCar != -1){
+           cars.get(posCar).setName(name);
+           cars.get(posCar).setYear(year);
+           cars.get(posCar).setBrand(brand);
+           cars.get(posCar).setPrice(price);
+
+           setObjects((ArrayList<Car>) cars);
+           getArquivo();
+           escrever(false); 
+           return true;
+        } else {
+           return false;
         }
-        
-        setObjects((ArrayList<Car>) cars);
-        getArquivo();
-        escrever(false); 
     }
     
-    public Car searchCar(String idCar) {
+    public int searchCar(String idCar) {
         clear();
         int i = 0;
-        Car objCar = null;
+        int posCar = -1;
         for(Car car : cars) {
             try {
                 if(cars.get(i).getIdCar() == Integer.valueOf(idCar)) {
@@ -146,7 +136,7 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
                         .append(car.getPrice())
                         .append("\n\n");
                     
-                    objCar = new Car(car.getIdCar(), car.getName(), car.getYear(), car.getBrand(), car.getPrice());
+                    posCar = i;
                     break;
                 }
             } catch(Exception e ) {
@@ -154,6 +144,6 @@ public class ControllerArquivoBinarioCar extends ControllerArquivoBinario {
             }
             i++;
         }
-        return objCar;
+        return posCar;
     }
 }

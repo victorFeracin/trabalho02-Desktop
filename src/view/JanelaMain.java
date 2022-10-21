@@ -45,7 +45,7 @@ public class JanelaMain extends javax.swing.JFrame {
         jLabel1.setText("Cars");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Clientes");
+        jLabel2.setText("Customers");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Brands");

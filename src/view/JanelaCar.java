@@ -15,7 +15,7 @@ import model.Car;
 public class JanelaCar extends javax.swing.JFrame {
     ControllerArquivoBinarioCar controle = new ControllerArquivoBinarioCar();
     /**
-     * Creates new form JanelaCliente
+     * Creates new form JanelaCar
      */
     public JanelaCar() {
         initComponents();
@@ -359,6 +359,11 @@ public class JanelaCar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Car successfully registered!", "Car registered", JOptionPane.INFORMATION_MESSAGE);
             controle.readCar();
             jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+            
+            jTextFieldRegName.setText("");
+            jTextFieldRegYear.setText("");
+            jTextFieldRegBrand.setText("");
+            jTextFieldRegPrice.setText("");
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Car not registered.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -383,10 +388,20 @@ public class JanelaCar extends javax.swing.JFrame {
 
     private void jButtonIdDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdDeleteMouseClicked
         try {
-            controle.deleteCar(jTextFieldIdDelete.getText());
-            JOptionPane.showMessageDialog(this, "Car with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Car removed", JOptionPane.INFORMATION_MESSAGE);
-            controle.readCar();
-            jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+            if(controle.deleteCar(jTextFieldIdDelete.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Car with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Car removed", JOptionPane.INFORMATION_MESSAGE);
+                controle.readCar();
+                jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldYearUpdate.setText("");
+                jTextFieldBrandUpdate.setText("");
+                jTextFieldPriceUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Car not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Something went wrong.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -394,10 +409,20 @@ public class JanelaCar extends javax.swing.JFrame {
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
         try {
-            controle.updateCar(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), Integer.valueOf(jTextFieldYearUpdate.getText()), jTextFieldBrandUpdate.getText(), Double.valueOf(jTextFieldPriceUpdate.getText()));
-            JOptionPane.showMessageDialog(this, "Car successfully updated!", "Car updated", JOptionPane.INFORMATION_MESSAGE);
-            controle.readCar();
-            jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+            if(controle.updateCar(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), Integer.valueOf(jTextFieldYearUpdate.getText()), jTextFieldBrandUpdate.getText(), Double.valueOf(jTextFieldPriceUpdate.getText())) == true) {
+                JOptionPane.showMessageDialog(this, "Car successfully updated!", "Car updated", JOptionPane.INFORMATION_MESSAGE);
+                controle.readCar();
+                jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldYearUpdate.setText("");
+                jTextFieldBrandUpdate.setText("");
+                jTextFieldPriceUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Car not found.", "Car not found: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not update car.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -405,14 +430,20 @@ public class JanelaCar extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            Car car = controle.searchCar(jTextFieldIdSearch.getText());
-            jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
+            int pos = controle.searchCar(jTextFieldIdSearch.getText());
+            Car car = controle.getCars().get(pos);
+            if (pos != -1) {
+                jTextPaneCars.setText(String.valueOf(controle.getSbCars()));
             
-            jTextFieldIdUpdate.setText(String.valueOf(car.getIdCar()));
-            jTextFieldNameUpdate.setText(String.valueOf(car.getName()));
-            jTextFieldYearUpdate.setText(String.valueOf(car.getYear()));
-            jTextFieldBrandUpdate.setText(String.valueOf(car.getBrand()));
-            jTextFieldPriceUpdate.setText(String.valueOf(car.getPrice()));
+                jTextFieldIdDelete.setText(String.valueOf(car.getIdCar()));
+                jTextFieldIdUpdate.setText(String.valueOf(car.getIdCar()));
+                jTextFieldNameUpdate.setText(String.valueOf(car.getName()));
+                jTextFieldYearUpdate.setText(String.valueOf(car.getYear()));
+                jTextFieldBrandUpdate.setText(String.valueOf(car.getBrand()));
+                jTextFieldPriceUpdate.setText(String.valueOf(car.getPrice()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Car not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this car.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }

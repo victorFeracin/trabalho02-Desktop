@@ -15,7 +15,7 @@ import model.Brand;
 public class JanelaBrand extends javax.swing.JFrame {
     ControllerArquivoBinarioBrand controle = new ControllerArquivoBinarioBrand();
     /**
-     * Creates new form JanelaCliente
+     * Creates new form JanelaBrand
      */
     public JanelaBrand() {
         initComponents();
@@ -339,6 +339,10 @@ public class JanelaBrand extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Brand successfully registered!", "Brand registered", JOptionPane.INFORMATION_MESSAGE);
             controle.readBrand();
             jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+            
+            jTextFieldRegName.setText("");
+            jTextFieldRegYear.setText("");
+            jTextFieldRegWebsite.setText("");
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Brand not registered.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -363,10 +367,19 @@ public class JanelaBrand extends javax.swing.JFrame {
 
     private void jButtonIdDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdDeleteMouseClicked
         try {
-            controle.deleteBrand(jTextFieldIdDelete.getText());
-            JOptionPane.showMessageDialog(this, "Brand with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Brand removed", JOptionPane.INFORMATION_MESSAGE);
-            controle.readBrand();
-            jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+            if(controle.deleteBrand(jTextFieldIdDelete.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Brand with ID " + jTextFieldIdDelete.getText() + " successfully removed", "Brand removed", JOptionPane.INFORMATION_MESSAGE);
+                controle.readBrand();
+                jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldYearUpdate.setText("");
+                jTextFieldWebsiteUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Brand not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Something went wrong.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -374,10 +387,19 @@ public class JanelaBrand extends javax.swing.JFrame {
 
     private void jButtonUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonUpdateMouseClicked
         try {
-            controle.updateBrand(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), Integer.valueOf(jTextFieldYearUpdate.getText()), jTextFieldWebsiteUpdate.getText());
-            JOptionPane.showMessageDialog(this, "Brand successfully updated!", "Brand updated", JOptionPane.INFORMATION_MESSAGE);
-            controle.readBrand();
-            jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+            if(controle.updateBrand(jTextFieldIdUpdate.getText(), jTextFieldNameUpdate.getText(), Integer.valueOf(jTextFieldYearUpdate.getText()), jTextFieldWebsiteUpdate.getText()) == true) {
+                JOptionPane.showMessageDialog(this, "Brand successfully updated!", "Brand updated", JOptionPane.INFORMATION_MESSAGE);
+                controle.readBrand();
+                jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+                
+                jTextFieldIdDelete.setText("");
+                jTextFieldIdUpdate.setText("");
+                jTextFieldNameUpdate.setText("");
+                jTextFieldYearUpdate.setText("");
+                jTextFieldWebsiteUpdate.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Brand not found.", "Brand not found: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not update brand.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
@@ -385,13 +407,19 @@ public class JanelaBrand extends javax.swing.JFrame {
 
     private void jButtonIdSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonIdSearchMouseClicked
         try {
-            Brand brand = controle.searchBrand(jTextFieldIdSearch.getText());
-            jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
+            int pos = controle.searchBrand(jTextFieldIdSearch.getText());
+            Brand brand = controle.getBrands().get(pos);
+            if (pos != -1) {
+                jTextPaneBrands.setText(String.valueOf(controle.getSbBrands()));
             
-            jTextFieldIdUpdate.setText(String.valueOf(brand.getIdBrand()));
-            jTextFieldNameUpdate.setText(String.valueOf(brand.getName()));
-            jTextFieldYearUpdate.setText(String.valueOf(brand.getYearCreated()));
-            jTextFieldWebsiteUpdate.setText(String.valueOf(brand.getWebsite()));
+                jTextFieldIdDelete.setText(String.valueOf(brand.getIdBrand()));
+                jTextFieldIdUpdate.setText(String.valueOf(brand.getIdBrand()));
+                jTextFieldNameUpdate.setText(String.valueOf(brand.getName()));
+                jTextFieldYearUpdate.setText(String.valueOf(brand.getYearCreated()));
+                jTextFieldWebsiteUpdate.setText(String.valueOf(brand.getWebsite()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Error. Brand not found.", "Error: ", JOptionPane.ERROR_MESSAGE);
+            }
         }catch(Exception e) {
             JOptionPane.showMessageDialog(this, "Error. Could not search this brand.", "Error: "+e, JOptionPane.ERROR_MESSAGE);
         }
